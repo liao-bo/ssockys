@@ -1,3 +1,5 @@
-# ssocks
-socket research
-origin source code were forked from somewhere
+# ssockys
+
+git clone git@github.com:liao-bo/ssockys.git
+chmod 777 deployVM.sh && ./deployVM.sh
+
