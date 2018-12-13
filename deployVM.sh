@@ -23,6 +23,11 @@ if ! command_exists docker; then
     wget https://get.docker.com/ -O /root/get_docker.sh &&sudo sh /root/get_docker.sh
 fi
 
+if [ "`service docker status|grep running`" = "" ];then
+   echo " start docker service"
+   service docker start
+fi   
+
 #delete old docker
 delete_docker yanheven/ssocks
 delete_docker siomiz/softethervpn
