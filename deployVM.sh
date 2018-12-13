@@ -33,10 +33,11 @@ delete_docker yanheven/ssocks
 delete_docker siomiz/softethervpn
 
 #install docker
-sudo docker run -p 8888:8388 --name ssokys yanheven/ssocks nohup python shadowsocks-2.9.0/shadowsocks/server.py -k $PASSWORD &
-sudo docker run -d -p 500:500/udp -p 4500:4500/udp -p 1701:1701/tcp --name l2tp -e PSK=custom -e USERNAME=custom -e PASSWORD=$PASSWORD siomiz/softethervpn
+#sudo docker run -p 8888:8388 --name ssokys yanheven/ssocks nohup python shadowsocks-2.9.0/shadowsocks/server.py -k $PASSWORD &
+sudo docker run -e PASSWORD=$PASSWORD -p 8888:8388 -p 8888:8388/udp --name ssokys -d shadowsocks/shadowsocks-libev
+sudo docker run -d -p 500:500/udp -p 4500:4500/udp -p 1701:1701/tcp --name l2tp -e PSK=custom -e USERNAME=custom -e PASSWORD=$PASSWORD -d siomiz/softethervpn
 sudo cp $DIR/chap-secrets.txt /root/chap-secrets
-sudo docker run -d --privileged -p 1723:1723 --name pptp --net="host"  -v /root/chap-secrets:/etc/ppp/chap-secrets mobtitude/vpn-pptp
+sudo docker run -d --privileged -p 1723:1723 --name pptp --net="host" -d  -v /root/chap-secrets:/etc/ppp/chap-secrets mobtitude/vpn-pptp
 
 sleep 10
 nc -vz 127.0.0.1 8888 >/dev/null 2>&1
