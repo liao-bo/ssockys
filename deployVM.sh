@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 DIR=$(cd `dirname $0`; pwd)
 if [ $1 ]; then
 	PASSWORD=$1
